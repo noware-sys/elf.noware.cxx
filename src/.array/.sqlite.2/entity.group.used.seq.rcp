@@ -1,9 +1,0 @@
-input = entity.group.used.seq.sql
-output = entity.group.used.seq.hxx
-translator = ../../tool/string.literal.raw.sh
-delimiter = ___
-
-all:
-	$(translator) $(input) $(output) $(delimiter);
-clean:
-	rm --force $(output);

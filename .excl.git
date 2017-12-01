@@ -1,0 +1,60 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.do
+*.act
+*.app
+*.out
+*.elf
+
+# Logs
+*.log
+*.journal
+
+# Custom
+known_hosts
+exclusion.cxx.git
+
+cfg
+lib
+doc.html
+
+# Temporary
+site/struct/
+doc/sys/
+doc/usr/abbr.txt
+doc/usr/cfg.txt
+doc/usr/dependency.txt
+doc/usr/event.log
+doc/usr/struct.txt
+doc/usr/usage.txt
+src/elf_exe.hxx
+src/elf_exe.cxx
+src/elf_exe.exe.cxx

@@ -1,3 +1,0 @@
-R"(
-#include "squence.sql"
-")

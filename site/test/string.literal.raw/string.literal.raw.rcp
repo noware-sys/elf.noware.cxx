@@ -1,7 +1,0 @@
-#.PHONY: clean
-#.PHONY : all, clean
-
-all:
-	./string.literal.raw.list.sh $(MAKE) all;
-clean:
-	./string.literal.raw.list.sh $(MAKE) all;

@@ -1,4 +1,0 @@
-#pragma once
-
-#include "number.hxx"
-#include "number.cxx"

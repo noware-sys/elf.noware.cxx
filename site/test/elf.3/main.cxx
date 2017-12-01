@@ -116,11 +116,8 @@ int main (int argc, char * argv [])
 		return EXIT_FAILURE;
 	}
 	
-	noware::elf file;
-	noware::unsigned_string content;
-	// Direct-Access Memory for the program
-	std::map <unsigned long int, unsigned char> dam;
-	content = file.read (argv [1]);
+	noware::elf_exe exe;
+	content = exe.file.read (argv [1]);
 	
 	if (content.empty ())
 	{
@@ -130,59 +127,31 @@ int main (int argc, char * argv [])
 	
 	std::cout << "'" << argv [0] << "': success: read file '" << argv [1] << "'" << std::endl;
 	
-	if (!file.load (content))
+	
+	if (!exe.file.load (content))
 	{
-		std::cerr << "'" << argv [0] << "': error: could not load file '" << argv [1] << "'" << std::endl;
+		std::cerr << "'" << argv [0] << "': error: could not load content '" << argv [1] << "'" << std::endl;
 		
 		//std::cout << "the content was:" << std::endl;
 		//std::cout << content << std::endl;
 		return EXIT_FAILURE;
 	}
 	
-	std::cout << "'" << argv [0] << "': success: loaded file '" << argv [1] << "'" << std::endl;
+	std::cout << "'" << argv [0] << "': success: loaded content '" << argv [1] << "'" << std::endl;
 	
 	
-	
-	// Load all 'LOAD' program segments into memory
-	unsigned long int phndx, phnum;
-	unsigned long int j;
-	unsigned long int vaddr;
-	unsigned long int filesz, memsz;
-	
-	phnum = noware::elf::integer (file.hdr.phnum.data, true);
-	for (phndx = 0; phndx < phnum; ++phndx)
+	if (!exe.start ())
 	{
-		// If this program segment is of the type 'LOAD', then load it
-		if (noware::elf::integer (file.prog [phndx].type.data, true) == 0x1/*PT_LOAD*/)
-		{
-			// Copy the program segment into memory
-			filesz = noware::elf::integer (file.prog [phndx].filesz.data, true);
-			vaddr = noware::elf::integer (file.prog [phndx].vaddr.data, true);
-			for (j = 0; j < filesz; ++j, ++vaddr)
-			{
-				// 8 bits (1 byte) at a time
-				//dam [vaddr] = file.prog [phndx].data.data.substr (j, 1/* 8 bits (1 byte) at a time*/);
-				dam [vaddr] = file.prog [phndx].data.data [j];
-			}
-			
-			// Pad the remaining space with zeroes
-			memsz = noware::elf::integer (file.prog [phndx].memsz.data, true);
-			for (; j < memsz; ++j, ++vaddr)
-			{
-				dam [vaddr] = (unsigned char) '0';
-			}
-		}
+		std::cerr << "'" << argv [0] << "': error: could not start processing '" << argv [1] << "'" << std::endl;
+		
+		//std::cout << "the content was:" << std::endl;
+		//std::cout << content << std::endl;
+		return EXIT_FAILURE;
 	}
 	
+	std::cout << "'" << argv [0] << "': success: processing file '" << argv [1] << "'" << std::endl;
 	
-	// Commence the program
-	unsigned long int entry;
-	entry = noware::elf::integer (file.hdr.entry.data, true);
-	assert (dam.count (entry) > 0);
-	std::cout << std::hex;
-	std::cout << std::showbase;
-	std::cout << "entry[" << entry << "]==[";
-	std::cout << noware::elf::integer (noware::unsigned_string (1, dam [entry]), true);
-	std::cout << "]";
-	std::cout << std::endl;
+	std::cout << "'" << argv [0] << "':  . . . " << std::endl;
+	
+	
 }

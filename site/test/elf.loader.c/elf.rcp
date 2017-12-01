@@ -1,0 +1,18 @@
+c = gcc
+
+result = elf.elf
+src = elf.c
+obj = elf.obj
+c_arg = -pie -fPIE -static-libgcc -static
+
+all: $(result)
+$(result): $(obj)
+	$(c) $(c_arg) -o $(result) $(obj);
+$(obj): $(src)
+	$(c) $(c_arg) -o $(obj) -c $(src);
+#noware-array.obj: $(lib_path)/$(lib)/array $(lib_path)/$(lib)/array.hxx $(lib_path)/$(lib)/array.cxx
+#	$(cxx) $(cxx_arg) -o noware-tool-ptr.obj -c $(lib_path)/$(lib)/array.cxx;
+#noware-array.obj: $(lib_path)/$(lib)/.array/.incl.hxx $(lib_path)/$(lib)/.array/.node.hxx $(lib_path)/$(lib)/.array/node.cxx
+#	$(cxx) $(cxx_arg) -o noware-tool-ptr.obj -c $(lib_path)/$(lib)/array.cxx;
+clean:
+	rm --force $(result) $(obj);

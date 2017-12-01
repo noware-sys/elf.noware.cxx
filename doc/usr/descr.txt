@@ -1,10 +1,1 @@
-A C++ Library
-
-Notable Components
-	nr (a number, based on CLN; a wrapper around CLN)
-	var (a container for a string or a number at any time; like a PHP variable)
-	array[<[value[, key]]>] (a templated, associative, single-dimensional, and dynamically-allocated array) (in progress)
-	tree[<[value[, key]]>] (a container for a <value>, or a templated, associative, multi-dimensional (recursive), and dynamically-allocated array<value, key> (value + array<value> (from above)); like a JavaScript var + a JSON object) (in progress)
-	db::sqlite (an SQLite (3) wrapper)
-	intel (an AI) (in progress)
-	mach (a clustered VM hypervisor) (in progress)
+An ELF parser
