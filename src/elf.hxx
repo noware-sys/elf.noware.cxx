@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include "../unsigned_string.hxx"
+#include <noware/unsigned_string.hxx>
 
 namespace noware
 {
