@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include <noware/unsigned_string.cxx>
+#include <noware/str_nsigned.cxx>
 
 #include ".elf/.cxx"
 
@@ -20,7 +20,7 @@ noware::elf::~elf (void)
 {
 }
 
-const bool noware::elf::load (const noware::unsigned_string & data)
+const bool noware::elf::load (const noware::str_nsigned & data)
 {
 	//bool x64;
 	unsigned long int offset;
@@ -643,12 +643,12 @@ const bool noware::elf::load (const noware::unsigned_string & data)
 	return true;
 }
 
-noware::unsigned_string const noware::elf::read (const std::string & file_name)
+noware::str_nsigned const noware::elf::read (const std::string & file_name)
 {
 	std::ifstream file;
 	std::streampos size;
 	unsigned char * data;
-	noware::unsigned_string value;
+	noware::str_nsigned value;
 	
 	file.open (file_name, std::ios::in | std::ios::binary | std::ios::ate);
 	
@@ -661,7 +661,7 @@ noware::unsigned_string const noware::elf::read (const std::string & file_name)
 	file.read (data, size);
 	file.close ();
 	
-	value = noware::unsigned_string (data, size);
+	value = noware::str_nsigned (data, size);
 	//std::cerr << std::hex;
 	//std::cerr << "debug::noware::elf::read::data[0x29]=" << "[" << ((unsigned long int) (data [0x29])) << "]" << std::endl;
 	//std::cerr << "debug::noware::elf::read::value[0x29]=" << "[" << ((unsigned long int) (value [0x29])) << "]" << std::endl;
@@ -669,7 +669,7 @@ noware::unsigned_string const noware::elf::read (const std::string & file_name)
 	return value;
 }
 
-const unsigned long int noware::elf::integer (const noware::unsigned_string & data, const bool & swap)
+const unsigned long int noware::elf::integer (const noware::str_nsigned & data, const bool & swap)
 {
 	unsigned long int value;
 	unsigned long int size;

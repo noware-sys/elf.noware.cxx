@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include <noware/unsigned_string.hxx>
+#include <noware/str_nsigned.hxx>
 
 namespace noware
 {
@@ -16,13 +16,13 @@ namespace noware
 				elf (void);
 				virtual ~elf (void);
 				
-				static noware::unsigned_string const read (std::string const &/* file_name*/);
-				virtual bool const load (noware::unsigned_string const &/* content as a string*/);
+				static noware::str_nsigned const read (std::string const &/* file_name*/);
+				virtual bool const load (noware::str_nsigned const &/* content as a string*/);
 				virtual bool const & loaded (void) const;
 				virtual bool const clear (void);
 				
 				// concatenate a char array of hex ints to one int
-				static unsigned long int const integer (const noware::unsigned_string &/* block*/, bool const &/* swap the ends of the array (for endianness) */ = false);
+				static unsigned long int const integer (const noware::str_nsigned &/* block*/, bool const &/* swap the ends of the array (for endianness) */ = false);
 				
 				virtual unsigned short int const & bits (void);
 			//protected:
